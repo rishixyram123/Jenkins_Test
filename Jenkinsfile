@@ -178,14 +178,16 @@ pipeline {
                                         fallbackScript: [
                                             classpath: [], 
                                             sandbox: false, 
-                                            script: 
-                                                "return['Could not get The environemnts']"
+                                            script: """
+                                                return['Could not get The environemnts']
+                                                """
                                         ], 
                                         script: [
                                             classpath: [], 
                                             sandbox: false, 
-                                            script: 
-                                                "return['dev','stage','prod']"
+                                            script: """
+                                                return['dev','stage','prod']
+                                                """
                                         ]
                                     ]
                                 ],
