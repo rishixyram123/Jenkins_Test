@@ -204,7 +204,7 @@ pipeline {
                                         script: [
                                                 classpath: [], 
                                                 sandbox: false, 
-                                                script:
+                                                script: '''
                                                 if (Env.equals("dev")){
                                                     return["ami-sd2345sd", "ami-asdf245sdf", "ami-asdf3245sd"]
                                                 }
@@ -214,6 +214,7 @@ pipeline {
                                                 else if(Env.equals("prod")){
                                                     return["ami-sdf34sdf", "ami-sdf34ds", "ami-sdf3sf3"]
                                                 }
+                                                '''
                                             ] 
                                     ]
                                 ],
@@ -226,7 +227,7 @@ pipeline {
                                         [$class: 'GroovyScript', 
                                         script: 'return["Could not get AMi Information"]', 
                                         script: [
-                                            script: 
+                                            script: '''
                                                     if (Env.equals("dev")){
                                                         return["ami-sd2345sd:  AMI with Java", "ami-asdf245sdf: AMI with Python", "ami-asdf3245sd: AMI with Groovy"]
                                                     }
@@ -236,6 +237,7 @@ pipeline {
                                                     else if(Env.equals("prod")){
                                                         return["ami-sdf34sdf:  AMI with Java", "ami-sdf34ds: AMI with Python", "ami-sdf3sf3: AMI with Groovy"]
                                                     }
+                                                    '''
                                                 ]
                                         ]
                                 ]
