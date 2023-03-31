@@ -460,7 +460,7 @@ pipeline {
                                     description: 'Select the Environemnt from the Dropdown List', 
                                     filterLength: 1, 
                                     filterable: false, 
-                                    name: 'ENVIRONMENT  ', 
+                                    name: 'ENVIRONMENT', 
                                     script: [
                                         $class: 'GroovyScript', 
                                         fallbackScript: [
