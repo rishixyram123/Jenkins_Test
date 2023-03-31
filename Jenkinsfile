@@ -383,41 +383,59 @@
 // }
 
 
-properties([
-  parameters([
-    [
-      $class: 'ChoiceParameter',
-      choiceType: 'PT_SINGLE_SELECT',
-      name: 'Environment',
-      script: [
-        $class: 'ScriptlerScript',
-        scriptlerScriptId:'Environments.groovy'
-      ]
-    ],
-    [
-      $class: 'CascadeChoiceParameter',
-      choiceType: 'PT_SINGLE_SELECT',
-      name: 'Host',
-      referencedParameters: 'Environment',
-      script: [
-        $class: 'ScriptlerScript',
-        scriptlerScriptId:'HostsInEnv.groovy',
-        parameters: [
-          [name:'Environment', value: '$Environment']
-        ]
-      ]
-   ]
- ])
-])
+// properties([
+//   parameters([
+//     [
+//       $class: 'ChoiceParameter',
+//       choiceType: 'PT_SINGLE_SELECT',
+//       name: 'Environment',
+//       script: [
+//         $class: 'ScriptlerScript',
+//         scriptlerScriptId:'Environments.groovy'
+//       ]
+//     ],
+//     [
+//       $class: 'CascadeChoiceParameter',
+//       choiceType: 'PT_SINGLE_SELECT',
+//       name: 'Host',
+//       referencedParameters: 'Environment',
+//       script: [
+//         $class: 'ScriptlerScript',
+//         scriptlerScriptId:'HostsInEnv.groovy',
+//         parameters: [
+//           [name:'Environment', value: '$Environment']
+//         ]
+//       ]
+//    ]
+//  ])
+// ])
 
-pipeline {
-  agent any
-  stages {
-    stage('Build') {
-      steps {
-        echo "${params.Environment}"
-        echo "${params.Host}"
-      }
-    }
-  }
-}
+// pipeline {
+//   agent any
+//   stages {
+//     stage('Build') {
+//       steps {
+//         echo "${params.Environment}"
+//         echo "${params.Host}"
+//       }
+//     }
+//   }
+// }
+
+import org.jenkinsci.plugins.scriptsecurity.sandbox.groovy.SecureGroovyScript
+import hudson.model.ParametersDefinitionProperty
+import hudson.model.ChoiceParameterDefinition
+
+def groovyScript = new SecureGroovyScript("""
+    def options = ['Option 1', 'Option 2', 'Option 3']
+    return options
+""", true, null)
+
+def choiceParam = new ChoiceParameterDefinition(
+    'CHOICE_PARAM',
+    groovyScript,
+    'Choose an option'
+)
+
+def job = Jenkins.instance.getItemByFullName('my-job-name', Job.class)
+job.addProperty(new ParametersDefinitionProperty(choiceParam))
