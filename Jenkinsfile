@@ -493,13 +493,13 @@ pipeline {
                                                 classpath: [], 
                                                 sandbox: false, 
                                                 script: '''
-                                                if (Env.equals("ENVIRONMENT_1")){
+                                                if (ENVIRONMENT.equals("ENVIRONMENT_1")){
                                                     return["dev01_01", "preprd01_01", "prd01_01"]
                                                 }
-                                                else if(Env.equals("ENVIRONMENT_2")){
+                                                else if(ENVIRONMENT.equals("ENVIRONMENT_2")){
                                                     return["dev01_02", "preprd01_02", "prd01_02"]
                                                 }
-                                                else if(Env.equals("ENVIRONMENT_3")){
+                                                else if(ENVIRONMENT.equals("ENVIRONMENT_3")){
                                                     return["dev01_03", "preprd01_03", "prd01_03"]
                                                 }
                                                 '''
@@ -516,13 +516,13 @@ pipeline {
                                         script: 'return["Could not get AMi Information"]', 
                                         script: [
                                             script: '''
-                                                    if (Env.equals("ENVIRONMENT_1")){
+                                                    if (ENVIRONMENT.equals("ENVIRONMENT_1")){
                                                         return["ami-sd2345sd:  AMI with Java", "ami-asdf245sdf: AMI with Python", "ami-asdf3245sd: AMI with Groovy"]
                                                     }
-                                                    else if(Env.equals("ENVIRONMENT_2")){
+                                                    else if(ENVIRONMENT.equals("ENVIRONMENT_2")){
                                                         return["ami-sd34sdf:  AMI with Java", "ami-sdf345sdc: AMI with Python", "ami-sdf34sdf: AMI with Groovy"]
                                                     }
-                                                    else if(Env.equals("ENVIRONMENT_3")){
+                                                    else if(ENVIRONMENT.equals("ENVIRONMENT_3")){
                                                         return["ami-sdf34sdf:  AMI with Java", "ami-sdf34ds: AMI with Python", "ami-sdf3sf3: AMI with Groovy"]
                                                     }
                                                     '''
