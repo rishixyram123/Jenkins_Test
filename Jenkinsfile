@@ -460,7 +460,7 @@ pipeline {
                                     description: 'Select the Environemnt from the Dropdown List', 
                                     filterLength: 1, 
                                     filterable: false, 
-                                    name: 'Env', 
+                                    name: 'ENVIRONMENT  ', 
                                     script: [
                                         $class: 'GroovyScript', 
                                         fallbackScript: [
@@ -473,34 +473,34 @@ pipeline {
                                             classpath: [], 
                                             sandbox: false, 
                                             script: 
-                                                "return['dev','stage','prod']"
+                                                "return['ENVIRONMENT_1','ENVIRONMENT_2','ENVIRONMENT_3']"
                                         ]
                                     ]
                                 ],
                                 [$class: 'CascadeChoiceParameter', 
                                     choiceType: 'PT_SINGLE_SELECT', 
-                                    description: 'Select the AMI from the Dropdown List',
+                                    description: 'Select the BUILD ENVIRONMENT from the Dropdown List',
                                     name: 'AMI List', 
-                                    referencedParameters: 'Env', 
+                                    referencedParameters: 'ENVIRONMENT', 
                                     script: 
                                         [$class: 'GroovyScript', 
                                         fallbackScript: [
                                                 classpath: [], 
                                                 sandbox: false, 
-                                                script: "return['Could not get Environment from Env Param']"
+                                                script: "return['Could not get Environment from ENVIRONMENT Param']"
                                                 ], 
                                         script: [
                                                 classpath: [], 
                                                 sandbox: false, 
                                                 script: '''
-                                                if (Env.equals("dev")){
-                                                    return["ami-sd2345sd", "ami-asdf245sdf", "ami-asdf3245sd"]
+                                                if (Env.equals("ENVIRONMENT_1")){
+                                                    return["dev01_01", "preprd01_01", "prd01_01"]
                                                 }
-                                                else if(Env.equals("stage")){
-                                                    return["ami-sd34sdf", "ami-sdf345sdc", "ami-sdf34sdf"]
+                                                else if(Env.equals("ENVIRONMENT_2")){
+                                                    return["dev01_02", "preprd01_02", "prd01_02"]
                                                 }
-                                                else if(Env.equals("prod")){
-                                                    return["ami-sdf34sdf", "ami-sdf34ds", "ami-sdf3sf3"]
+                                                else if(Env.equals("ENVIRONMENT_3")){
+                                                    return["dev01_03", "preprd01_03", "prd01_03"]
                                                 }
                                                 '''
                                             ] 
@@ -510,19 +510,19 @@ pipeline {
                                     choiceType: 'ET_ORDERED_LIST', 
                                     description: 'Select the  AMI based on the following information', 
                                     name: 'Image Information', 
-                                    referencedParameters: 'Env', 
+                                    referencedParameters: 'ENVIRONMENT', 
                                     script: 
                                         [$class: 'GroovyScript', 
                                         script: 'return["Could not get AMi Information"]', 
                                         script: [
                                             script: '''
-                                                    if (Env.equals("dev")){
+                                                    if (Env.equals("ENVIRONMENT_1")){
                                                         return["ami-sd2345sd:  AMI with Java", "ami-asdf245sdf: AMI with Python", "ami-asdf3245sd: AMI with Groovy"]
                                                     }
-                                                    else if(Env.equals("stage")){
+                                                    else if(Env.equals("ENVIRONMENT_2")){
                                                         return["ami-sd34sdf:  AMI with Java", "ami-sdf345sdc: AMI with Python", "ami-sdf34sdf: AMI with Groovy"]
                                                     }
-                                                    else if(Env.equals("prod")){
+                                                    else if(Env.equals("ENVIRONMENT_3")){
                                                         return["ami-sdf34sdf:  AMI with Java", "ami-sdf34ds: AMI with Python", "ami-sdf3sf3: AMI with Groovy"]
                                                     }
                                                     '''
