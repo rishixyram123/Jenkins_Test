@@ -473,7 +473,7 @@ pipeline {
                                             classpath: [], 
                                             sandbox: false, 
                                             script: 
-                                                "return['ENVIRONMENT_1','ENVIRONMENT_2','ENVIRONMENT_3']"
+                                                "return['ENVIRONMENT_1','ENVIRONMENT_2','ENVIRONMENT_3','Test_123']"
                                         ]
                                     ]
                                 ],
@@ -528,6 +528,28 @@ pipeline {
                                                     '''
                                                 ]
                                         ]
+                                ],
+                                 [$class: 'ChoiceParameter', 
+                                    choiceType: 'PT_SINGLE_SELECT', 
+                                    description: 'Select the Environemnt from the Dropdown List', 
+                                    filterLength: 1, 
+                                    filterable: false, 
+                                    name: 'test', 
+                                    script: [
+                                        $class: 'GroovyScript', 
+                                        fallbackScript: [
+                                            classpath: [], 
+                                            sandbox: false, 
+                                            script: 
+                                                "return['Could not get The environemnts']"
+                                        ], 
+                                        script: [
+                                            classpath: [], 
+                                            sandbox: false, 
+                                            script: 
+                                                "return['ENVIRONMENT_1','ENVIRONMENT_2','ENVIRONMENT_3','Test_123']"
+                                        ]
+                                    ]
                                 ]
                             ])
                         ])
