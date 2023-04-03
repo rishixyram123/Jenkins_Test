@@ -102,12 +102,12 @@ pipeline {
                                         ]
                                     ]
                                 ],
-                                 [$class: 'ChoiceParameter', 
+                                [$class: 'ChoiceParameter', 
                                     choiceType: 'PT_SINGLE_SELECT', 
                                     description: 'Select the Environemnt from the Dropdown List', 
                                     filterLength: 1, 
                                     filterable: false, 
-                                    name: 'test', 
+                                    name: 'Test_123', 
                                     script: [
                                         $class: 'GroovyScript', 
                                         fallbackScript: [
