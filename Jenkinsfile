@@ -25,7 +25,7 @@ pipeline {
                                             classpath: [], 
                                             sandbox: false, 
                                             script: 
-                                                "return['dev','stage','prod']"
+                                                "return['dev','stage','prod','env','demo']"
                                         ]
                                     ]
                                 ],
@@ -85,7 +85,7 @@ pipeline {
                                     choiceType: 'PT_SINGLE_SELECT', 
                                     description: 'Select the AMI from the Dropdown List',
                                     name: 'test123', 
-                                    referencedParameters: 'Env_demo', 
+                                    referencedParameters: 'Env', 
                                     script: 
                                         [$class: 'GroovyScript', 
                                         fallbackScript: [
