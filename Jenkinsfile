@@ -109,6 +109,28 @@ pipeline {
                                                 '''
                                             ] 
                                     ]
+                                ],
+                                 [$class: 'ChoiceParameter', 
+                                    choiceType: 'PT_SINGLE_SELECT', 
+                                    description: 'Testing the Advantages of ACP the Dropdown List', 
+                                    filterLength: 1, 
+                                    filterable: false, 
+                                    name: 'ENV_TEST', 
+                                    script: [
+                                        $class: 'GroovyScript', 
+                                        fallbackScript: [
+                                            classpath: [], 
+                                            sandbox: false, 
+                                            script: 
+                                                "return['Could not get The environemnts']"
+                                        ], 
+                                        script: [
+                                            classpath: [], 
+                                            sandbox: false, 
+                                            script: 
+                                                "return['dev','stage','prod','env','demo_test','demo_test_1','demo_test_2']"
+                                        ]
+                                    ]
                                 ]
                             ])
                         ])
