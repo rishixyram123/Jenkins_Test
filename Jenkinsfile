@@ -102,27 +102,28 @@ pipeline {
                                         ]
                                     ]
                                 ],
-                                [$class: 'ChoiceParameter', 
-                                    choiceType: 'PT_SINGLE_SELECT', 
-                                    description: 'Select the Environemnt from the Dropdown List', 
-                                    filterLength: 1, 
-                                    filterable: false, 
-                                    name: 'Test_123', 
-                                    script: [
-                                        $class: 'GroovyScript', 
-                                        fallbackScript: [
-                                            classpath: [], 
-                                            sandbox: false, 
-                                            script: 
-                                                "return['Could not get The environemnts']"
-                                        ], 
+                                 [$class: 'DynamicReferenceParameter', 
+                                    choiceType: 'ET_ORDERED_LIST', 
+                                    description: 'Select the  AMI based on the following information', 
+                                    name: 'Image', 
+                                    referencedParameters: 'ENVIRONMENT', 
+                                    script: 
+                                        [$class: 'GroovyScript', 
+                                        script: 'return["Could not get AMi Information"]', 
                                         script: [
-                                            classpath: [], 
-                                            sandbox: false, 
-                                            script: 
-                                                "return['ENVIRONMENT_1','ENVIRONMENT_2','ENVIRONMENT_3','Test_123']"
+                                            script: '''
+                                                    if (ENVIRONMENT.equals("ENVIRONMENT_1")){
+                                                        return["ami-sd2345sd:  AMI with Java", "ami-asdf245sdf: AMI with Python", "ami-asdf3245sd: AMI with Groovy"]
+                                                    }
+                                                    else if(ENVIRONMENT.equals("ENVIRONMENT_2")){
+                                                        return["ami-sd34sdf:  AMI with Java", "ami-sdf345sdc: AMI with Python", "ami-sdf34sdf: AMI with Groovy"]
+                                                    }
+                                                    else if(ENVIRONMENT.equals("ENVIRONMENT_3")){
+                                                        return["ami-sdf34sdf:  AMI with Java", "ami-sdf34ds: AMI with Python", "ami-sdf3sf3: AMI with Groovy"]
+                                                    }
+                                                    '''
+                                                ]
                                         ]
-                                    ]
                                 ]
                             ])
                         ])
